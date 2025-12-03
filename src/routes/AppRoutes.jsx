@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
+import LoginPage from "../pages/Login";
 import DashboardPage from "../pages/UserDashboard";
 import FieldsPage from "../pages/FieldsPage";
 

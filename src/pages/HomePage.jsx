@@ -3,7 +3,6 @@ import React from "react";
 import { Box, Typography, Button, Grid, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import heroImg from "../assets/images/farm-hero.jpg";
-import Footer from "../components/Footer"; // Only footer used
 
 export default function Homepage() {
   const services = [
@@ -45,7 +44,7 @@ export default function Homepage() {
       <Box
         sx={{
           width: "100vw",
-          position: "absolute",
+          position: "fixed", // FIXED to avoid hiding content
           top: 0,
           left: 0,
           right: 0,
@@ -54,8 +53,8 @@ export default function Homepage() {
           alignItems: "center",
           py: 2,
           px: { xs: 2, md: 6 },
-          zIndex: 20,
-          backgroundColor: "rgba(0,0,0,0.15)",
+          zIndex: 1000,
+          backgroundColor: "rgba(0,0,0,0.7)",
         }}
       >
         <Typography
@@ -122,6 +121,7 @@ export default function Homepage() {
           alignItems: "center",
           textAlign: "center",
           px: 2,
+          pt: "80px", // offset for navbar
         }}
       >
         <Box sx={{ maxWidth: 800 }}>
@@ -198,7 +198,7 @@ export default function Homepage() {
               <Grid
                 item
                 xs={12}
-                md={6}
+                md={6} // 2 cards per row on md+
                 key={item.title}
                 sx={{ display: "flex", justifyContent: "center" }}
               >
@@ -237,8 +237,6 @@ export default function Homepage() {
           </Grid>
         </Box>
       </Box>
-
-     
     </Box>
   );
 }
