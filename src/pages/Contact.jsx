@@ -26,8 +26,6 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // TODO: integrate backend API call here
     console.log("Contact form submitted", formData);
 
     setSuccess(true);
@@ -44,7 +42,7 @@ export default function Contact() {
         justifyContent: "center",
         alignItems: "center",
         p: 2,
-        pt: { xs: "100px", md: "120px" }, // Add top padding to avoid navbar overlap
+        pt: { xs: "100px", md: "120px" },
       }}
     >
       <Paper

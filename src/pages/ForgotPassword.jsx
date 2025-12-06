@@ -11,7 +11,6 @@ export default function ForgotPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Add backend integration to send reset link or code
     console.log("Forgot password requested for:", formData);
 
     setSuccess(true);

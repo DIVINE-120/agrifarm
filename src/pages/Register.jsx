@@ -18,13 +18,11 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation
+  
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-
-    // TODO: Send formData to backend
     console.log("Registration submitted", formData);
 
     setSuccess(true);
@@ -36,7 +34,7 @@ export default function Register() {
       sx={{
         width: "100vw",
         minHeight: "100vh",
-        pt: { xs: 10, md: 12 }, // space for navbar
+        pt: { xs: 10, md: 12 },
         backgroundColor: "#F3F7F1",
         display: "flex",
         justifyContent: "center",
