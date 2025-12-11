@@ -4,6 +4,7 @@ import { Box, Typography, TextField, Button, Paper, Snackbar, Alert } from "@mui
 export default function Register() {
   const [formData, setFormData] = useState({
     name: "",
+    phone: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -18,15 +19,15 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-  
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
+
     console.log("Registration submitted", formData);
 
     setSuccess(true);
-    setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+    setFormData({ name: "", phone: "", email: "", password: "", confirmPassword: "" });
   };
 
   return (
@@ -34,11 +35,11 @@ export default function Register() {
       sx={{
         width: "100vw",
         minHeight: "100vh",
-        pt: { xs: 10, md: 12 },
         backgroundColor: "#F3F7F1",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "flex-start",
+        pt: { xs: "64px", sm: "64px" },
         p: 2,
       }}
     >
@@ -47,6 +48,7 @@ export default function Register() {
         sx={{
           maxWidth: 500,
           width: "100%",
+          mt: 2,
           p: 4,
           borderRadius: 3,
           backgroundColor: "#fff",
@@ -64,6 +66,17 @@ export default function Register() {
             label="Full Name"
             name="name"
             value={formData.name}
+            onChange={handleChange}
+            fullWidth
+            required
+            sx={{ mb: 2 }}
+          />
+
+          <TextField
+            label="Phone Number"
+            name="phone"
+            type="tel"
+            value={formData.phone}
             onChange={handleChange}
             fullWidth
             required

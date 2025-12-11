@@ -1,8 +1,7 @@
-// src/pages/Homepage.jsx
 import React from "react";
 import { Box, Typography, Button, Grid, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
-import heroImg from "../assets/images/farm-hero.jpg";
+import heroVideo from "../assets/images/watermarked_preview.mp4";
 
 export default function Homepage() {
   const services = [
@@ -44,7 +43,7 @@ export default function Homepage() {
       <Box
         sx={{
           width: "100vw",
-          position: "fixed", // FIXED to avoid hiding content
+          position: "fixed",
           top: 0,
           left: 0,
           right: 0,
@@ -113,21 +112,46 @@ export default function Homepage() {
         sx={{
           width: "100vw",
           height: "100vh",
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url(${heroImg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          position: "relative",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
-          px: 2,
           pt: "80px", // offset for navbar
+          overflow: "hidden",
         }}
       >
-        <Box sx={{ maxWidth: 800 }}>
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: 0,
+          }}
+        >
+          <source src={heroVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Overlay Content */}
+        <Box
+          sx={{
+            position: "relative",
+            zIndex: 1,
+            maxWidth: 800,
+            px: 2,
+            color: "#fff",
+          }}
+        >
           <Typography
             sx={{
-              color: "white",
               fontWeight: 800,
               fontSize: { xs: "2rem", md: "3.2rem" },
               mb: 2,
@@ -139,7 +163,6 @@ export default function Homepage() {
 
           <Typography
             sx={{
-              color: "white",
               fontSize: { xs: "1rem", md: "1.3rem" },
               mb: 4,
               maxWidth: 700,

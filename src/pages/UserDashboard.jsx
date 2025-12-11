@@ -52,16 +52,16 @@ export default function UserDashboard() {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", width: "100vw" }}>
+      
       {/* Navbar */}
       <Navbar />
 
-      {/* Dashboard wrapper with padding top to avoid navbar overlap */}
+      {/* Dashboard wrapper (space removed) */}
       <Box
         sx={{
           display: "flex",
           flex: 1,
           width: "100%",
-          pt: { xs: "56px", sm: "64px" }, // push content below fixed navbar
         }}
       >
         {/* Sidebar */}
@@ -73,9 +73,9 @@ export default function UserDashboard() {
             display: "flex",
             flexDirection: "column",
             p: 2,
-            height: `calc(100vh - 64px)`, // full viewport minus navbar
+            height: "100vh",
             position: "sticky",
-            top: { xs: 56, sm: 64 },
+            top: 0, // Fix: Remove the top offset
             overflowY: "auto",
           }}
         >
@@ -118,6 +118,7 @@ export default function UserDashboard() {
 
         {/* Main content */}
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+          
           {/* Top user bar */}
           <Box
             sx={{
@@ -142,6 +143,7 @@ export default function UserDashboard() {
 
           {/* Scrollable content */}
           <Box sx={{ flex: 1, overflowY: "auto", p: 3, bgcolor: "#F3F7F1" }}>
+            
             {/* Dashboard Tab */}
             {activeTab === "dashboard" && (
               <>
@@ -216,10 +218,7 @@ export default function UserDashboard() {
                             <Button
                               variant="contained"
                               size="small"
-                              sx={{
-                                bgcolor: "#2E7D32",
-                                "&:hover": { bgcolor: "#27632a" }
-                              }}
+                              sx={{ bgcolor: "#2E7D32", "&:hover": { bgcolor: "#27632a" } }}
                             >
                               Place Order
                             </Button>
@@ -263,36 +262,103 @@ export default function UserDashboard() {
               </>
             )}
 
-            {/* Profile Tab */}
-            {activeTab === "profile" && (
-              <>
-                <Typography variant="h4" sx={{ mb: 3, fontWeight: 700, color: "#2E7D32" }}>
-                  My Profile
-                </Typography>
+           {/* Profile Tab */}
+{activeTab === "profile" && (
+  <>
+    <Typography
+      variant="h4"
+      sx={{ mb: 3, fontWeight: 700, color: "#2E7D32" }}
+    >
+      My Profile
+    </Typography>
 
-                <Paper sx={{ p: 3, borderRadius: 3 }}>
-                  <Typography>Name: {user.name}</Typography>
-                  <Typography>Email: {user.email}</Typography>
-                  <Typography>Role: {user.role}</Typography>
+    <Paper
+      sx={{
+        p: 4,
+        borderRadius: 3,
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 4,
+        boxShadow: 3,
+        flexWrap: "wrap",
+      }}
+    >
+      {/* Profile Avatar */}
+      <Box sx={{ textAlign: "center" }}>
+        <Avatar
+          alt={user.name}
+          src={user.avatar || "/default-avatar.png"}
+          sx={{ width: 120, height: 120, mb: 2 }}
+        />
+        <Button
+          variant="outlined"
+          component="label"
+          sx={{ textTransform: "none" }}
+        >
+          Upload Photo
+          <input
+            type="file"
+            hidden
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onload = () => setUser({ ...user, avatar: reader.result });
+                reader.readAsDataURL(file);
+              }
+            }}
+          />
+        </Button>
+      </Box>
 
-                  <Button
-                    variant="contained"
-                    sx={{
-                      mt: 2,
-                      bgcolor: "#2E7D32",
-                      "&:hover": { bgcolor: "#27632a" }
-                    }}
-                  >
-                    Edit Profile
-                  </Button>
-                </Paper>
-              </>
-            )}
+      {/* Profile Details */}
+      <Box sx={{ flexGrow: 1, minWidth: 250 }}>
+        <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          {user.name}
+        </Typography>
+        <Typography variant="body1" sx={{ color: "text.secondary", mt: 1 }}>
+          Email: {user.email}
+        </Typography>
+        <Typography variant="body1" sx={{ color: "text.secondary", mt: 1 }}>
+          Phone: {user.phone || "Not provided"}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            mt: 1,
+            display: "inline-block",
+            px: 1.5,
+            py: 0.5,
+            bgcolor: "#E8F5E9",
+            color: "#2E7D32",
+            borderRadius: 1,
+            fontWeight: 500,
+          }}
+        >
+          {user.role}
+        </Typography>
+
+        <Box sx={{ mt: 3 }}>
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: "#2E7D32",
+              "&:hover": { bgcolor: "#27632a" },
+            }}
+          >
+            Edit Profile
+          </Button>
+        </Box>
+      </Box>
+    </Paper>
+  </>
+)}
+
+
           </Box>
         </Box>
       </Box>
-
-      
     </Box>
   );
 }
